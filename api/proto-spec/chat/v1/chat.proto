@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package chat.v1;
+
+// パスが一意になってしまうので別の方法で解決したい
+option go_package = "github.com/MokkeMeguru/chat-benchmarks/internal/infrastructure/connect/proto/chat/v1;chatv1";
+
+import "google/protobuf/timestamp.proto";
+
+service ChatService {
+  // 検証用の一時的なユーザーを作成 RPC
+  rpc TempCreateUser(TempCreateUserRequest) returns (TempCreateUserResponse) {} 
+  rpc Send(SendRequest) returns (SendResponse) {}
+  rpc Receive(ReceiveRequest) returns (stream ReceiveResponse) {}
+}
+
+// Request and Response messages
+message SendRequest {
+  string room_id = 1;
+  string message = 2;
+}
+
+message SendResponse {
+  string message_id = 1;
+}
+
+message ReceiveRequest {
+  string room_id = 1;
+}
+
+message ReceiveResponse {
+  Message message = 2;
+}
+
+message TempCreateUserRequest {
+  string name = 1;
+}
+
+message TempCreateUserResponse {
+  User user = 1;
+}
+
+// User message
+message User {
+  string user_id = 1;
+  string name = 2;
+}
+
+// Message message
+message Message {
+  string message_id = 1;
+  string message = 3;
+  User user = 2;
+  google.protobuf.Timestamp created_at  = 4;
+  google.protobuf.Timestamp updated_at = 5;
+}

@@ -1,0 +1,9 @@
+version: v2
+modules:
+  - path: api/proto-spec
+lint:
+  use:
+    - DEFAULT
+breaking:
+  use:
+    - FILE

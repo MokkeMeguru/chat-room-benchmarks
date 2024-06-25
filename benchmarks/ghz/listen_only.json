@@ -1,0 +1,16 @@
+{
+    "proto": "api/proto-spec/chat/v1/chat.proto",
+    "call": "chat.v1.ChatService.Receive",
+    "host": "localhost:8080",
+    "insecure": true,
+    "async": true,
+    "total": 15,
+    "concurrency": 1000,
+    "rps": 1000,
+    "max-duration": "10s",
+    "stream-call-duration": "10s",
+    "stream-call-count": 1,
+    "data": {
+        "room_id": "room1"
+    }
+}
